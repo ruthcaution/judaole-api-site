@@ -14,6 +14,8 @@
       nav { height:76px; display:flex; align-items:center; justify-content:space-between; }
       .brand { font-size:22px; font-weight:800; letter-spacing:1.5px; color:var(--blue); }
       nav a { color:var(--ink); margin-left:22px; text-decoration:none; font-size:14px; }
+      .cart-link { display:inline-flex; align-items:center; gap:6px; padding:7px 10px; margin-left:18px; border:1px solid var(--line); border-radius:6px; background:#fff; color:var(--ink); font-weight:700; }
+      .cart-count { display:inline-grid; place-items:center; min-width:18px; height:18px; padding:0 5px; border-radius:10px; background:var(--blue); color:#fff; font-size:11px; }
       main { padding:68px 0; }
       .hero { display:grid; grid-template-columns:1.05fr .95fr; align-items:center; gap:36px; }
       .hero-copy { max-width:600px; }
@@ -25,6 +27,12 @@
       .grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; margin-top:56px; }
       .card { background:#fff; border:1px solid var(--line); border-radius:8px; padding:16px; }
       .product-image { display:block; width:100%; aspect-ratio:1 / .82; object-fit:contain; background:#fff; border-radius:5px; margin-bottom:16px; }
+      .card h2 { margin-top:0; }
+      .product-actions { display:flex; gap:10px; align-items:center; margin-top:18px; }
+      .add-cart { border:0; border-radius:6px; padding:10px 12px; background:var(--blue); color:#fff; font-weight:700; cursor:pointer; }
+      .view-product { color:var(--blue); font-size:14px; text-decoration:none; font-weight:700; }
+      .notice { position:fixed; right:20px; bottom:20px; max-width:300px; padding:12px 16px; border-radius:7px; background:#102a43; color:#fff; box-shadow:0 10px 24px rgba(16,42,67,.2); opacity:0; transform:translateY(10px); pointer-events:none; transition:.2s ease; }
+      .notice.show { opacity:1; transform:translateY(0); }
       section { padding:50px 0; border-top:1px solid var(--line); }
       footer { padding:28px 0; background:#102a43; color:#d9e2ec; font-size:14px; }
       footer a { color:#fff; text-decoration:none; }
@@ -32,7 +40,7 @@
     </style>
   </head>
   <body>
-    <header><div class="wrap"><nav><div class="brand">JUDAOLE</div><div><a href="#products">Products</a><a href="#about">About</a><a href="#contact">Contact</a></div></nav></div></header>
+    <header><div class="wrap"><nav><div class="brand">JUDAOLE</div><div><a href="#products">Products</a><a href="#about">About</a><a href="#contact">Contact</a><a class="cart-link" href="#products" aria-label="Shopping cart">Cart <span class="cart-count" id="cart-count">0</span></a></div></nav></div></header>
     <main class="wrap">
       <div class="hero">
         <div class="hero-copy"><h1>Replacement parts, made simple.</h1>
@@ -44,9 +52,9 @@
         <h2>Featured products</h2>
         <p>Explore common home-appliance replacement-part categories. Please confirm your appliance model before purchasing.</p>
         <div class="grid" aria-label="Featured replacement parts">
-          <article class="card"><img class="product-image" src="assets/microwave-grease-filter-thumb.jpg" alt="Microwave grease filter"><h2>Microwave Grease Filters</h2><p>Replacement mesh filters designed to support everyday microwave ventilation maintenance.</p></article>
-          <article class="card"><img class="product-image" src="assets/microwave-charcoal-filter-thumb.jpg" alt="Microwave charcoal filter"><h2>Microwave Charcoal Filters</h2><p>Odor-absorbing replacement filters for recirculating over-the-range microwave systems.</p></article>
-          <article class="card"><img class="product-image" src="assets/replacement-mesh-filter-thumb.jpg" alt="Replacement mesh filter set"><h2>Replacement Filter Sets</h2><p>Filter options for a range of home-appliance ventilation needs. Confirm your appliance model before purchasing.</p></article>
+          <article class="card"><img class="product-image" src="assets/microwave-grease-filter-thumb.jpg" alt="Microwave grease filter"><h2>Microwave Grease Filters</h2><p>Replacement mesh filters designed to support everyday microwave ventilation maintenance.</p><div class="product-actions"><button class="add-cart" data-product="Microwave Grease Filters">Add to cart</button><a class="view-product" href="#contact">View product</a></div></article>
+          <article class="card"><img class="product-image" src="assets/microwave-charcoal-filter-thumb.jpg" alt="Microwave charcoal filter"><h2>Microwave Charcoal Filters</h2><p>Odor-absorbing replacement filters for recirculating over-the-range microwave systems.</p><div class="product-actions"><button class="add-cart" data-product="Microwave Charcoal Filters">Add to cart</button><a class="view-product" href="#contact">View product</a></div></article>
+          <article class="card"><img class="product-image" src="assets/replacement-mesh-filter-thumb.jpg" alt="Replacement mesh filter set"><h2>Replacement Filter Sets</h2><p>Filter options for a range of home-appliance ventilation needs. Confirm your appliance model before purchasing.</p><div class="product-actions"><button class="add-cart" data-product="Replacement Filter Sets">Add to cart</button><a class="view-product" href="#contact">View product</a></div></article>
         </div>
       </section>
       <section id="about"><h2>About JUDAOLE</h2><p>JUDAOLE is an independent online business focused on home-appliance replacement products and customer support.</p></section>
@@ -54,6 +62,21 @@
       <section id="privacy"><h2>Privacy</h2><p>We respect visitor privacy. This informational website does not collect personal information unless you choose to provide it through an authorized customer-support channel.</p></section>
     </main>
     <footer><div class="wrap">&copy; 2026 JUDAOLE. All rights reserved.</div></footer>
+    <div class="notice" id="cart-notice" role="status" aria-live="polite"></div>
+    <script>
+      const cartCount = document.getElementById('cart-count');
+      const notice = document.getElementById('cart-notice');
+      let count = 0;
+      document.querySelectorAll('.add-cart').forEach((button) => {
+        button.addEventListener('click', () => {
+          count += 1;
+          cartCount.textContent = count;
+          notice.textContent = `${button.dataset.product} added to cart.`;
+          notice.classList.add('show');
+          window.setTimeout(() => notice.classList.remove('show'), 2200);
+        });
+      });
+    </script>
   </body>
 </html>
 
