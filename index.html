@@ -15,34 +15,38 @@
       .brand { font-size:22px; font-weight:800; letter-spacing:1.5px; color:var(--blue); }
       nav a { color:var(--ink); margin-left:22px; text-decoration:none; font-size:14px; }
       main { padding:68px 0; }
-      .hero { max-width:720px; }
+      .hero { display:grid; grid-template-columns:1.05fr .95fr; align-items:center; gap:36px; }
+      .hero-copy { max-width:600px; }
+      .hero-image { width:100%; border-radius:12px; border:1px solid var(--line); background:#fff; object-fit:cover; aspect-ratio:1 / 1; }
       h1 { margin:0 0 18px; font-size:clamp(36px, 7vw, 62px); line-height:1.1; letter-spacing:-1px; }
       h2 { font-size:24px; margin:0 0 8px; }
       p { margin:0 0 18px; color:#486581; }
       .button { display:inline-block; padding:12px 18px; border-radius:6px; background:var(--blue); color:#fff; text-decoration:none; font-weight:700; }
       .grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; margin-top:56px; }
-      .card { background:#fff; border:1px solid var(--line); border-radius:8px; padding:24px; }
+      .card { background:#fff; border:1px solid var(--line); border-radius:8px; padding:16px; }
+      .product-image { display:block; width:100%; aspect-ratio:1 / .82; object-fit:contain; background:#fff; border-radius:5px; margin-bottom:16px; }
       section { padding:50px 0; border-top:1px solid var(--line); }
       footer { padding:28px 0; background:#102a43; color:#d9e2ec; font-size:14px; }
       footer a { color:#fff; text-decoration:none; }
-      @media (max-width:680px) { nav a { margin-left:12px; } .grid { grid-template-columns:1fr; } main { padding:46px 0; } }
+      @media (max-width:680px) { nav a { margin-left:12px; } .hero, .grid { grid-template-columns:1fr; } .hero-image { max-width:420px; } main { padding:46px 0; } }
     </style>
   </head>
   <body>
     <header><div class="wrap"><nav><div class="brand">JUDAOLE</div><div><a href="#products">Products</a><a href="#about">About</a><a href="#contact">Contact</a></div></nav></div></header>
     <main class="wrap">
       <div class="hero">
-        <h1>Replacement parts, made simple.</h1>
+        <div class="hero-copy"><h1>Replacement parts, made simple.</h1>
         <p>JUDAOLE supports customers seeking reliable home-appliance replacement parts and compatibility information.</p>
-        <a class="button" href="#contact">Contact us</a>
+        <a class="button" href="#contact">Contact us</a></div>
+        <img class="hero-image" src="assets/microwave-grease-filter-thumb.jpg" alt="Stainless steel microwave grease filters">
       </div>
       <section id="products">
         <h2>Featured products</h2>
         <p>Explore common home-appliance replacement-part categories. Please confirm your appliance model before purchasing.</p>
         <div class="grid" aria-label="Featured replacement parts">
-          <article class="card"><h2>Microwave Grease Filters</h2><p>Replacement mesh filters designed to support everyday microwave ventilation maintenance.</p></article>
-          <article class="card"><h2>Microwave Charcoal Filters</h2><p>Odor-absorbing replacement filters for recirculating over-the-range microwave systems.</p></article>
-          <article class="card"><h2>Refrigerator Air Filters</h2><p>Replacement air-filter options for helping maintain a fresh refrigerator interior.</p></article>
+          <article class="card"><img class="product-image" src="assets/microwave-grease-filter-thumb.jpg" alt="Microwave grease filter"><h2>Microwave Grease Filters</h2><p>Replacement mesh filters designed to support everyday microwave ventilation maintenance.</p></article>
+          <article class="card"><img class="product-image" src="assets/microwave-charcoal-filter-thumb.jpg" alt="Microwave charcoal filter"><h2>Microwave Charcoal Filters</h2><p>Odor-absorbing replacement filters for recirculating over-the-range microwave systems.</p></article>
+          <article class="card"><img class="product-image" src="assets/replacement-mesh-filter-thumb.jpg" alt="Replacement mesh filter set"><h2>Replacement Filter Sets</h2><p>Filter options for a range of home-appliance ventilation needs. Confirm your appliance model before purchasing.</p></article>
         </div>
       </section>
       <section id="about"><h2>About JUDAOLE</h2><p>JUDAOLE is an independent online business focused on home-appliance replacement products and customer support.</p></section>
